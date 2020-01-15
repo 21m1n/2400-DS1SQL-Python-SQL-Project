@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container mb-3 mt-3">
+
+  {% if movie_list|length < 1 %}
+  <h3>There are no movies. Create one below!</h3>
+
+  {% else %}
+
+  <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th class="th-sm">Title
+        </th>
+        <th class="th-sm">Director
+        </th>
+        <th class="th-sm">Actor
+        </th>
+        <th class="th-sm">Year
+        </th>
+        <th class="th-sm">IMDB Score
+        </th>
+        <th class="th-sm">Country
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in movie_list %}
+        <tr>
+          <td> <a href={{ url_for('movies', id=m.id) }}>{{ m.movie_title }}</a> </td>
+          <td> {{ m.director_name }} </td>
+          <td> {{ m.actor_1_name }}, {{ m.actor_2_name }}, {{ m.actor_3_name }}</td>
+          <td> {{ m.title_year }} </td>
+          <td> {{ m.imdb_score }} </td>
+          <td> {{ m.country }} </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+
+<script>
+    // Material Design example
+    $(document).ready(function () {
+      $('#dtMaterialDesignExample').DataTable();
+      $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+        $(this).parent().append($(this).children());
+      });
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+        const $this = $(this);
+        $this.attr("placeholder", "Search");
+        $this.removeClass('form-control-sm');
+      });
+      $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+      $('#dtMaterialDesignExample_wrapper select').removeClass(
+      'custom-select custom-select-sm form-control form-control-sm');
+      $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+      $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+    });
+
+</script>
+
+<div class="container" style="min-height: 30px;">
+  <button class="btn btn-warning btn-sm" type="button">
+    <a href="\add_movies" style="color: black;text-decoration: none;"><i class="fas fa-plus-circle"></i>
+    Add Movies
+    </a>
+  </button>
+</div>
+
+{% endblock %}

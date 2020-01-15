@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+<style>
+
+.btn {
+    margin:0 auto;
+    display:block;
+    font-family: 'Rokkitt', serif;
+	font-weight: bolder;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row h-100">
+		<div class="col-sm-12 my-auto">
+			<div class="w-100 mx-auto">
+				<br>
+				<h3>Welcome!</h3>
+				<br>
+				<form class="signup-form", method="POST" action="/signup">
+					{{ form.hidden_tag() }}
+					{{ wtf.form_field(form.username) }}
+					{{ wtf.form_field(form.email)}}
+					{{ wtf.form_field(form.password) }}
+					{{ wtf.form_field(form.confirm) }}
+					<button class="btn btn-outline-dark btn-block" type="sumbit">SIGN UP</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

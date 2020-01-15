@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+<style>
+body {
+    padding-top: 55px; 
+    padding-bottom: 20px; 
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+ /* Timeline vertical line */
+ul.timeline:before {
+    content: ' ';
+    background: #f5b700;
+    display: inline-block;
+    position: absolute;
+    left: 16px;
+    width: 4px;
+    height: 100%;
+    z-index: 400;
+    border-radius: 1rem;
+}
+
+li.timeline-item {
+    margin: 20px 0;
+    outline-color: #f5b700;
+    outline-width: 1px;
+    outline-style: dotted;
+}
+
+/* Timeline item circle marker */
+li.timeline-item::before {
+    content: ' ';
+    background: lightgray;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #f5b700;
+    left: 11px;
+    width: 14px;
+    height: 14px;
+    z-index: 400;
+}
+
+
+.text-gray {
+    color: darkgray;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+
+
+
+<div class="container py-5">
+
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h3>Welcome, {{name}}</h3>
+            <span class="dashboad-summary">You have watched {{ recent|length }} Movies. 
+            </span>
+            {% if recent|length >= 1 %}
+            <a href={{ url_for('usr', id=recent[0][0].uid )}}>See the full list.</a>
+            {% else %}
+            <a href="\datatable">Go add some now.</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                
+                <!-- Timeline -->
+                <ul class="timeline">
+
+                    {% for r in recent %}
+                    <li class="timeline-item rounded ml-3 p-3">
+                        <span class="comments-date">{{ r[0].date_created.date() }}</span>
+                        <br />
+                        <span class="movie-title-display">{{ r[1].movie_title }}</span>
+                        <span class="user-ratings">&nbsp;&nbsp;rating:&nbsp;&nbsp;{{ r[0].score }}</span>
+                        <br />
+                        <span class="user-comments">&nbsp;&nbsp;{{ r[0].review }}</span>
+                    </li>
+
+                    {% endfor %}
+                </ul><!-- End -->
+
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}

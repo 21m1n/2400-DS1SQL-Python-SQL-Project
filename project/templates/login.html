@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+<style>
+
+.btn {
+    margin:0 auto;
+    display:block;
+    font-family: 'Rokkitt', serif;
+	font-weight: bolder;
+}
+</style>
+{% endblock %}
+{% block body %}
+
+
+
+
+<div class="container h-100">
+	<br>
+	<h3>Welcome back!</h3>
+	<br>
+	<form class="signup-form", method="POST" action="/login/">
+		{{ form.hidden_tag() }}
+		{{ wtf.form_field(form.username) }}
+		{{ wtf.form_field(form.password) }}
+		<p style="color: red; font-weight: bold; font-size: 10px;">{{error}}</p>
+		{{ wtf.form_field(form.remember) }}
+		<button class="btn btn-outline-dark btn-block" type="sumbit">LOG IN</button>
+
+	</form>
+	
+</div>
+
+
+{% endblock %}

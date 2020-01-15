@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<style>
+
+li.comment-item {
+    margin: 20px 0;
+    outline-color: #f5b700;
+    outline-width: 1px;
+    outline-style: dotted;
+}
+.container {
+    max-width: 600px;
+}
+
+.btn {
+    margin:0 auto;
+    display:block;
+    width: 150px;
+    font-family: 'Rokkitt', serif;
+	font-weight: bolder;
+}
+
+.row-content {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+ul.comments {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5rem;
+}
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron"><h3>{{movie.movie_title}} ({{movie.title_year}})</h3></div>
+        </div>
+    </div>
+    {% if session.logged_in %}
+    <div class="row" style="padding-bottom: 20;">
+        <div class="col-md-6">
+            {% if watched %}
+            <button type="button" class="btn btn-success" disabled>
+                <i class="fas fa-check-circle"></i>&nbsp;&nbsp;Watched
+            </button>
+            {% else %}
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+                <i class="fas fa-plus-circle"></i>&nbsp;
+                Add Review
+            </button>
+            <div class="collapse" id="collapseReview">
+                <div class="card card-body">
+                    <form action={{ url_for('movies', id=movie.id) }} id="reviewForm" method="POST">
+                        <div class="form-group">
+                            <label for="score">Select your score</label>
+                            <select class="form-control" type='number' name='score' id="score">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <label for="review">Your thoughts</label>
+                            <textarea class="form-control" type="text" name="review" id="review"></textarea>
+                        </div>
+                        <button class="btn btn-outline-dark btn-block btn-sm" type="sumbit">ADD REVIEW</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-warning" type="button" onclick="window.location.href = '/update/{{ movie.id }}';">
+                <i class="fas fa-pen-square"></i>&nbsp;
+                Edit Content
+            </button>
+        </div>
+    </div>
+    {% endif %}
+    <hr>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Director</div>
+        <div class="col-md-6">{{movie.director_name}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Duration</div>
+        <div class="col-md-6">{{movie.duration}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">IMDB Score</div>
+        <div class="col-md-6"><a href={{movie.movie_imdb_link}}>{{movie.imdb_score}}</a>/10.0</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Language</div>
+        <div class="col-md-6">{{movie.language}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Country</div>
+        <div class="col-md-6">{{movie.country}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Content Rating</div>
+        <div class="col-md-6">{{movie.content_rating}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Genres</div>
+        <div class="col-md-6">{{movie.genres}}</div>
+    </div>
+    <div class="row row-content">
+        <div class="col-md-6 tr-title">Actors</div>
+        <div class="col-md-6">{{movie.actor_1_name}}, {{movie.actor_2_name}}, {{movie.actor_3_name}}</div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h6>Comments</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="comments">
+                {% if userComments|length < 1 %}
+                <li>No one commented yet.</li>
+                {% else %}
+                {% for r in userComments %}
+                    {% if r[1].mid == movie.id %}
+                    <li class="comment-item rounded ml-3 p-3">
+                        <span class="comments-date">{{ r[1].date_created.date() }}</span>
+                        <br />
+                        <span class="username-display">
+                            <a href="\user\{{r[0].id}}">
+                                {{ r[0].username }}
+                            </a>
+                            
+                        </span>
+                        <span class="user-ratings">&nbsp;&nbsp;rating:&nbsp;&nbsp;{{ r[1].score }}</span>
+                        <br />
+                        <hr>
+                        <span class="user-comments">&nbsp;&nbsp;{{ r[1].review }}</span>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

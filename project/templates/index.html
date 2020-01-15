@@ -1,0 +1,79 @@
+{% extends 'no_nav.html' %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+
+<style>
+/* Cursor */
+.typed-cursor {
+}
+/* If fade out option is set */
+.typed-fade-out {
+}
+
+html, body {
+    height: 100%;
+    background-color: black;
+}
+
+.container {
+    height: 100%;
+}
+
+.tall {
+    height: 70%;
+}
+
+.btn {
+    margin:0 auto;
+    display:block;
+    width: 100px;
+    font-family: 'Rokkitt', serif;
+    font-weight: bolder;
+}
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row tall">
+        <div class="col-sm-12 my-auto">
+            <div class="w-250 mx-auto">
+                <h1><span class="typing" style="color: white;"></span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+            <button class="btn btn-outline-warning" type="button" onclick="window.location.href = '/login';">
+                LOG IN
+            </button>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-outline-warning" type="button" onclick="window.location.href = '/datatable';">
+                BROWSE
+            </button>
+        </div>
+        <div class="col-sm-3"></div>
+
+    </div>
+</div>
+
+
+<script>
+var typed = new Typed('.typing', {
+  // Waits 1000ms after typing "First"
+strings: ['"Love means never having to say you\'re sorry."', '"Nobody\'s perfect."', '"May the Force be with you."', '"I\'m going to make him an offer he can\'t refuse."', '"Of all the gin joints in all the towns in all the world, she walks into mine."', '"There\'s no place like home."', '"Why so serious?"', '"I have always depended on the kindness of strangers."', '"Well, here\'s another nice mess you\'ve gotten me into!"', '"Mama always said life was like a box of chocolates. You never know what you\'re gonna get."', '"After all, tomorrow is another day!"', '"We\'ll always have Paris."'],
+typeSpeed: 50,
+loop: true,
+backSpeed: 50,
+smartBackspace: true,
+shuffle: true,
+backDelay: 700
+});
+</script>
+{% endblock %}
+

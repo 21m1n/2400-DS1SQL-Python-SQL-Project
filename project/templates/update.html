@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<style>
+body {
+    padding-top: 35px; 
+    padding-bottom: 20px; 
+}
+
+input[type=text], .txtarea{
+margin-bottom: 10px;
+}
+
+.container {
+    max-width: 600px;
+}
+
+label {
+    font-size: 14px;
+    font-family: 'Rokkitt', serif;
+    font-weight: bold;
+}
+
+.btn {
+    margin:0 auto;
+    display:block;
+    width: 150px;
+    font-family: 'Rokkitt', serif;
+	font-weight: bolder;
+}
+
+.add-movie {
+    outline-color: #f5b700;
+    outline-width: 1px;
+    outline-style: dotted;
+    padding: 40px;
+    padding-bottom: 20px;
+    border-radius: 30px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12 add-movie">
+            <h3>Edit Movie</h3>
+            <hr>
+            <form action="/update/{{ movie.id }}" method="POST">
+                <div class="form-row">
+                    <label for="movie_title">Movie Title</label>
+                    <input type="text" class="form-control" name="movie_title" id="movie_title" value="{{ movie.movie_title }} " required>
+                    <hr>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="title_year">Year</label>
+                        <input type="text" class="form-control" name="title_year" id="title_year" placeholder="Year" value="{{ movie.title_year }}" >
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" name="country" id="country" placeholder="Country"  value="{{ movie.country }}" >
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <label for="duration">Duration (mins)</label>
+                        <input type="text" class="form-control" name="duration" id="duration" placeholder="Duration (mins)"  value="{{ movie.duration }}" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="director_name">Director Name</label>
+                    <input type="text" class="form-control" name="director_name" id="director_name" placeholder="Director Name" value="{{ movie.director_name }}" >
+                    <hr>
+                </div>
+        
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="actor_1_name">Actor Name</label>
+                        <input type="text" class="form-control" name="actor_1_name" id="actor_1_name" placeholder="Actor 1" value="{{ movie.actor_1_name }}" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="actor_2_name">Actor Name</label>
+                        <input type="text" class="form-control" name="actor_2_name" id="actor_2_name" placeholder="Actor 2" value="{{ movie.actor_2_name }}" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="actor_3_name">Actor Name</label>
+                        <input type="text" class="form-control" name="actor_3_name" id="actor_3_name" placeholder="Actor 3" value="{{ movie.actor_3_name }}" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="genres">Genres</label>
+                        <input type="text" class="form-control" name="genres" id="genres" placeholder="Genres" value="{{ movie.genres }}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="language">Language</label>
+                        <input type="text" class="form-control" name="language" id="language" placeholder="Language" value="{{ movie.language }}" >
+                    </div>
+                    <div class="col-md-4">
+                        <label for="content_rating">Content Rating</label>
+                        <input type="text" class="form-control" name="content_rating" id="content_rating" placeholder="Content Rating" value="{{ movie.content_rating }}" >
+                    </div>
+                </div>
+                
+                
+                <div class="form-row">
+                    <div class="col">
+                        <label for="movie_imdb_link">IMDB Link</label>
+                        <input type="text" class="form-control" name="movie_imdb_link" id="movie_imdb_link" placeholder="IMDB Link (required)"  value="{{ movie.movie_imdb_link }}" required>
+                    </div>
+                    <div class="col">
+                        <label for="imdb_score">IMDB Score</label>
+                        <input type="text" class="form-control" name="imdb_score" id="imdb_score" placeholder="IMDB Score" value="{{ movie.imdb_score }}">
+                    </div>
+                </div>
+                <hr>
+                <button class="btn btn-outline-dark btn-block" type="sumbit">EDIT MOVIE</button>
+            </form>
+        
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

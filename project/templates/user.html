@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h3> {{ user.username }}'s Watchlist</h3>
+        </div>
+    </div>
+
+
+    {% if watchlist | length < 1 %}
+    No movies yet
+    {% else %}
+
+    <table id="userWatchlist" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th class="th-sm">Movie Title</th>
+            <th class="th-sm">Score</th>
+            <th class="th-sm">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in watchlist %}
+            <tr>
+              <td> {{ item[1].movie_title }} </td>
+              <td> {{ item[0].score }} </td>
+              <!-- <td class="table-review"> {{ item[0].review }}</td> -->
+              <td> {{ item[0].date_created.date() }} </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+</div>
+
+<script>
+    // Material Design example
+    $(document).ready(function () {
+      $('#userWatchlist').DataTable();
+      $('#userWatchlist_wrapper').find('label').each(function () {
+        $(this).parent().append($(this).children());
+      });
+      $('#userWatchlist_wrapper .dataTables_filter').find('input').each(function () {
+        const $this = $(this);
+        $this.attr("placeholder", "Search");
+        $this.removeClass('form-control-sm');
+      });
+      $('#userWatchlist_wrapper .dataTables_length').addClass('d-flex flex-row');
+      $('#userWatchlist_wrapper .dataTables_filter').addClass('md-form');
+      $('#userWatchlist_wrapper select').removeClass(
+      'custom-select custom-select-sm form-control form-control-sm');
+      $('#userWatchlist_wrapper select').addClass('mdb-select');
+      $('#userWatchlist_wrapper .mdb-select').materialSelect();
+      $('#userWatchlist_wrapper .dataTables_filter').find('label').remove();
+    });
+
+</script>
+
+{% endblock %}
