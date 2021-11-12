@@ -1,11 +1,28 @@
-# Python-and-SQL-project
+# Python & SQL project
 
+## Highlights of the project 
 
-1. Project description is [here](https://github.com/21m1n/Python-and-SQL-project/blob/master/project%20description.pdf)
-2. Code is [here](https://github.com/21m1n/Python-and-SQL-project/tree/master/project)
-3. type the following to run the app 
+Anyone can:
 
-```
-$ python app.py
-```
+* browse existing content 
+* check other users' timeline and watchlist
+* register a new account 
+
+A logged in user can:
+
+* create new content 
+* edit existing content 
+* rate the existing films and write down their reviews 
+* edit their own watchlist 
+
+## Main packages used
+
+* flask 
+* SQLAlchemy
+* Bootstrap
+
+## Note
+
+* type `python app.py` in the terminal to run the apps. 
+* detailed project walkthrough can be found [here](https://github.com/21m1n/Python-and-SQL-project/blob/master/project%20walkthrough.pdf).
 
